@@ -1,0 +1,24 @@
+{
+  "name": "HowIsMyBaby",
+  "version": "1.0.0",
+  "description": "A nodejs project to stream a  webcam  to watch over my baby's condition 🍼👶",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wakeupmh/HowIsMyBaby.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wakeupmh/HowIsMyBaby/issues"
+  },
+  "homepage": "https://github.com/wakeupmh/HowIsMyBaby#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
+  }
+}
