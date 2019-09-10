@@ -5,30 +5,26 @@
     </head>
     <body>
         <video autoplay></video>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
         <script>
-            // get video dom element
+            var socket = io();
             const video = document.querySelector('video');
-            
-            // request access to webcam
-            navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
-            
-            // returns a frame encoded in base64
+            //request access to webcam
+            navigator.mediaDevices.getUserMedia({video: true, audio:true}).then((stream) => video.srcObject = stream);
+
+            //returns a frame encoded in base64
             const getFrame = () => {
                 const canvas = document.createElement('canvas');
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
                 canvas.getContext('2d').drawImage(video, 0, 0);
-                const data = canvas.toDataURL('image/png');
+                const data = canvas.toDataURL('image/webp');
                 return data;
             }
-            const WS_URL = 'ws://localhost:3001';
-            const FPS = 30;
-            const ws = new WebSocket(WS_URL);
-        
-            ws.onopen = () => {
-                setInterval(() => {
-                    ws.send(window.btoa(getFrame()));
-                }, 1000 / FPS);
+            window.onload = function(){
+                setInterval(()=>{
+                    socket.emit("stream", getFrame());
+                });
             }
         </script>
     </body>
